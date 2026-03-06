@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   return (
     <header className="border-b border-black sticky top-0 bg-white z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +35,7 @@ export function Header() {
           {/* Actions */}
           <div className="flex items-center gap-4">
             <button
-              // onClick={() => setIsCartOpen(true)}
+              onClick={() => setIsCartOpen(true)}
               className="relative hover:opacity-70 transition-opacity"
               aria-label="Shopping cart"
             >
@@ -51,6 +52,7 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden hover:opacity-70 transition-opacity"
               aria-label="Menu"
+              suppressHydrationWarning
             >
               {isMobileMenuOpen ? (
                 <X className="size-5" />

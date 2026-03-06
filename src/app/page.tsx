@@ -1,7 +1,5 @@
-import Link from 'next/link';
 import { ProductCard } from './components/ProductCard';
 import { products } from './data/products';
-import ProductDetailPage from './productDetail/page';
 
 export default function Home() {
   return (
@@ -18,8 +16,6 @@ export default function Home() {
         </div>
       </div>
 
-      <Link href="/checkout">Checkout</Link>
-      {/* <ProductDetailPage /> */}
       {/* Products Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-2xl tracking-widest mb-8">ALL PRODUCTS</h2>
