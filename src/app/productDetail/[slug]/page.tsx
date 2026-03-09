@@ -1,3 +1,4 @@
+import { useCart } from '@/app/context/CartContext';
 import { products } from '@/app/data/products';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -8,6 +9,8 @@ interface Props {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
+
+  const { addToCart } = useCart();
   const product = products.find((p) => p.slug === slug);
 
   if (!product) return notFound();

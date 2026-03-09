@@ -1,12 +1,4 @@
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  description: string;
-  slug: string;
-}
+import { Category, Product } from '@/types';
 
 export const products: Product[] = [
   {
@@ -91,7 +83,7 @@ export const products: Product[] = [
   },
 ];
 
-export const categories = [
+export const categories: Category[] = [
   { id: 'all', name: 'All Products', slug: '' },
   { id: 'women', name: 'Women', slug: 'women' },
   { id: 'men', name: 'Men', slug: 'men' },
