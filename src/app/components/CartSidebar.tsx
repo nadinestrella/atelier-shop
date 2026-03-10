@@ -1,9 +1,20 @@
 'use client';
 import { X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export function CartSidebar() {
-  const { isCartOpen, setIsCartOpen, totalItems } = useCart();
+  const {
+    cart,
+    addToCart,
+    clearCart,
+    totalPrice,
+    removeFromCart,
+    isCartOpen,
+    setIsCartOpen,
+    totalItems,
+  } = useCart();
 
   if (!isCartOpen) return null;
   return (
@@ -29,23 +40,48 @@ export function CartSidebar() {
 
           {/* Cart Items */}
 
-          <div>
-            {totalItems > 0 ? (
-              <div>
-                <img />
-                <h3>Product Name</h3>
-                <span>price</span>
-              </div>
-            ) : (
-              <p>Your cart is empty</p>
-            )}
-          </div>
+          {totalItems > 0 ? (
+            <div>
+              {cart.map((item) => (
+                <div key={item.product.id}>
+                  <Image
+                    src={item.product.image}
+                    alt={item.product.name}
+                    width={100}
+                    height={200}
+                  />
+                  <h3>{item.product.name}</h3>
+                  <span>{item.product.price}</span>
 
-          {/* Cart Items */}
-          <div>
-            <span>TOTAL</span>
-            <button>CHECKOUT</button>
-          </div>
+                  <div>
+                    <button onClick={() => removeFromCart(item.product.id)}>
+                      {' '}
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>Your cart is empty</p>
+          )}
+
+          {/* Footer */}
+
+          {cart.length > 0 && (
+            <div className="flex flex-col justify-between items-center mt-auto p-4 border-t border-black">
+              <div className="flex flex-row justify-between w-full mb-4">
+                <span>TOTAL</span>
+                <span>{totalPrice.toFixed(2)}</span>
+              </div>
+              <Link
+                href="/checkout"
+                className="bg-black text-white py-4 px-8 tracking-widest text-sm hover:bg-gray-800 transition-colors"
+              >
+                CHECKOUT
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </>
