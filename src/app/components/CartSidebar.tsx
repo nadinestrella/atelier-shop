@@ -123,6 +123,7 @@ export function CartSidebar() {
                 <span>{totalPrice.toFixed(2)}</span>
               </div>
               <Link
+                onClick={() => setIsCartOpen(false)}
                 href="/checkout"
                 className="bg-black text-white py-4 px-8 tracking-widest text-sm hover:bg-gray-800 transition-colors"
               >
