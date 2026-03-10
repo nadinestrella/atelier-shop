@@ -6,9 +6,9 @@ import { useCart } from '../context/CartContext';
 import { categories } from '../data/products';
 
 export function Header() {
-  const { totalItems } = useCart();
+  const { setIsCartOpen, totalItems } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <header className="border-b border-black sticky top-0 bg-white z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -6,6 +6,7 @@ const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
@@ -20,6 +21,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prevCart, { product, quantity: 1 }];
     });
+    setIsCartOpen(true);
   };
 
   const removeFromCart = (productId: string) => {
@@ -44,6 +46,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         addToCart,
         removeFromCart,
         clearCart,
+        isCartOpen,
+        setIsCartOpen,
         totalItems,
         totalPrice,
       }}
