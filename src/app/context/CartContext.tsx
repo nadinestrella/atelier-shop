@@ -30,6 +30,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const updateQuantity = (productId: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.product.id === productId ? { ...item, quantity } : item,
+      ),
+    );
+  };
+
   const clearCart = () => {
     setCart([]);
   };
@@ -45,6 +57,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         cart,
         addToCart,
         removeFromCart,
+        updateQuantity,
         clearCart,
         isCartOpen,
         setIsCartOpen,

@@ -7,9 +7,9 @@ import Link from 'next/link';
 export function CartSidebar() {
   const {
     cart,
-    addToCart,
     clearCart,
     totalPrice,
+    updateQuantity,
     removeFromCart,
     isCartOpen,
     setIsCartOpen,
@@ -25,7 +25,10 @@ export function CartSidebar() {
         className="fixed inset-0 bg-black/50 z-50"
       >
         {/* Sidebar */}
-        <div className="flex flex-col fixed right-0 top-0 h-full w-full max-w-md bg-white z-50">
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="flex flex-col fixed right-0 top-0 h-full w-full max-w-md bg-white z-50"
+        >
           {/* Header */}
           <div className="flex flex-row  ">
             <h2> SHOPPING BAG ({totalItems}) </h2>
@@ -63,6 +66,9 @@ export function CartSidebar() {
                       <div className="flex flex-row  gap-3">
                         <div className=" flex items-center border border-black">
                           <button
+                            onClick={() =>
+                              updateQuantity(item.product.id, item.quantity - 1)
+                            }
                             className="p-1 hover:bg-black hover:text-white transition-colors"
                             aria-label="Decrease quantity"
                           >
@@ -70,6 +76,9 @@ export function CartSidebar() {
                           </button>
                           <span className="px-3 text-sm">{item.quantity}</span>
                           <button
+                            onClick={() =>
+                              updateQuantity(item.product.id, item.quantity + 1)
+                            }
                             className="p-1 hover:bg-black hover:text-white transition-colors"
                             aria-label="Increase quantity"
                           >
@@ -93,6 +102,14 @@ export function CartSidebar() {
               </p>
             )}
           </div>
+          {cart.length > 0 && (
+            <button
+              className="text-xs underline hover:opacity-70 transition-opacity mb-4"
+              onClick={() => clearCart()}
+            >
+              Clear Cart
+            </button>
+          )}
 
           {/* Footer */}
           {cart.length > 0 && (
