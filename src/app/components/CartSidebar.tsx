@@ -30,9 +30,13 @@ export function CartSidebar() {
           className="flex flex-col fixed right-0 top-0 h-full w-full max-w-md bg-white z-50"
         >
           {/* Header */}
-          <div className="flex flex-row  ">
-            <h2> SHOPPING BAG ({totalItems}) </h2>
+          <div className="flex items-center justify-between p-6 border-b border-black">
+            <h2 className="tracking-widest text-lg">
+              {' '}
+              SHOPPING BAG ({totalItems}){' '}
+            </h2>
             <button
+              className="hover:opacity-70 transition-opacity"
               onClick={() => setIsCartOpen(false)}
               aria-label="Close cart"
             >
