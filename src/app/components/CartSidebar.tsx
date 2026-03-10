@@ -1,5 +1,5 @@
 'use client';
-import { X } from 'lucide-react';
+import { Minus, Plus, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -20,7 +20,6 @@ export function CartSidebar() {
   return (
     <>
       {/* Background Overlay*/}
-
       <div
         onClick={() => setIsCartOpen(false)}
         className="fixed inset-0 bg-black/50 z-50"
@@ -39,35 +38,63 @@ export function CartSidebar() {
           </div>
 
           {/* Cart Items */}
+          <div className="flex-1 overflow-y-auto p-6">
+            {totalItems > 0 ? (
+              <div className="space-y-6">
+                {cart.map((item) => (
+                  <div key={item.product.id} className="flex gap-4">
+                    <div className="bg-gray-100">
+                      <Image
+                        src={item.product.image}
+                        alt={item.product.name}
+                        width={100}
+                        height={150}
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-8">
+                      <h3 className="text-sm tracking-wide mb-1">
+                        {item.product.name}
+                      </h3>
+                      <span className="text-sm mb-2">
+                        {item.product.price.toFixed(2)}
+                      </span>
 
-          {totalItems > 0 ? (
-            <div>
-              {cart.map((item) => (
-                <div key={item.product.id}>
-                  <Image
-                    src={item.product.image}
-                    alt={item.product.name}
-                    width={100}
-                    height={200}
-                  />
-                  <h3>{item.product.name}</h3>
-                  <span>{item.product.price}</span>
-
-                  <div>
-                    <button onClick={() => removeFromCart(item.product.id)}>
-                      {' '}
-                      Remove
-                    </button>
+                      <div className="flex flex-row  gap-3">
+                        <div className=" flex items-center border border-black">
+                          <button
+                            className="p-1 hover:bg-black hover:text-white transition-colors"
+                            aria-label="Decrease quantity"
+                          >
+                            <Minus className="size-4" />
+                          </button>
+                          <span className="px-3 text-sm">{item.quantity}</span>
+                          <button
+                            className="p-1 hover:bg-black hover:text-white transition-colors"
+                            aria-label="Increase quantity"
+                          >
+                            <Plus className="size-4" />
+                          </button>
+                        </div>
+                        <button
+                          onClick={() => removeFromCart(item.product.id)}
+                          className="text-xs underline hover:opacity-70 transition-opacity"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p>Your cart is empty</p>
-          )}
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-500 mt-8">
+                Your cart is empty
+              </p>
+            )}
+          </div>
 
           {/* Footer */}
-
           {cart.length > 0 && (
             <div className="flex flex-col justify-between items-center mt-auto p-4 border-t border-black">
               <div className="flex flex-row justify-between w-full mb-4">
