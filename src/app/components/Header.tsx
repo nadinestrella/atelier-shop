@@ -1,10 +1,12 @@
 'use client';
-import Link from 'next/link';
-import { categories } from '../data/products';
-import { Menu, ShoppingBag, X } from 'lucide-react';
 import { useState } from 'react';
+import Link from 'next/link';
+import { Menu, ShoppingBag, X } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { categories } from '../data/products';
 
 export function Header() {
+  const { totalItems } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   return (
@@ -33,20 +35,20 @@ export function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex  items-center gap-4">
             <button
               onClick={() => setIsCartOpen(true)}
               className="relative hover:opacity-70 transition-opacity"
               aria-label="Shopping cart"
             >
               <ShoppingBag className="size-5" />
-              {/* {cartItemsCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full size-5 flex items-center justify-center">
-                  {cartItemsCount}
-                </span>
-              )} */}
             </button>
 
+            {totalItems > 0 && (
+              <span className="text-sm tracking-wider uppercase hover:opacity-70 transition-opacity">
+                BASKET {totalItems}
+              </span>
+            )}
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

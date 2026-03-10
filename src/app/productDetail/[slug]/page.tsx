@@ -1,7 +1,7 @@
-import { useCart } from '@/app/context/CartContext';
-import { products } from '@/app/data/products';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { AddToCartButton } from '@/app/components';
+import { products } from '@/app/data/products';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -10,7 +10,6 @@ interface Props {
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
 
-  const { addToCart } = useCart();
   const product = products.find((p) => p.slug === slug);
 
   if (!product) return notFound();
@@ -30,9 +29,7 @@ export default async function ProductDetailPage({ params }: Props) {
         <div className="flex flex-col justify-center gap-6">
           <h2 className="text-3xl tracking-widest">{product.name}</h2>
           <p className="text-xl">${product.price.toFixed(2)}</p>
-          <button className="bg-black text-white py-4 px-8 tracking-widest text-sm hover:bg-gray-800 transition-colors">
-            ADD TO CART
-          </button>
+          <AddToCartButton product={product} />
         </div>
       </div>
     </div>
