@@ -1,6 +1,11 @@
 'use client';
+
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useCart } from '../context/CartContext';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Handbag } from 'lucide-react';
 
 interface FormData {
   firstName: string;
@@ -22,19 +27,42 @@ export default function CheckoutPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+  const { clearCart, cart, totalItems, totalPrice } = useCart();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = (data: FormData) => {
     setIsSubmitting(true);
     console.log(data);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      clearCart();
+    }, 2000);
   };
+
+  if (totalItems === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen gap-6">
+        <p className="text-2xl tracking-widest mb-4">Your cart is empty.</p>
+        <div className="flex flex-row items-center gap-6">
+          <Link
+            href="/"
+            className="underline hover:opacity-70 transition-opacity"
+          >
+            Continue shopping
+          </Link>
+
+          <Handbag className="size-6" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h2 className="text-3xl tracking-wider mb-12">CHECKOUT</h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 pb-8">
         <fieldset className="flex flex-col gap-6">
           <legend className="text-lg tracking-wider mb-6">
             CONTACT INFORMATION
@@ -232,6 +260,51 @@ export default function CheckoutPage() {
           {isSubmitting ? 'PROCESSING...' : 'PLACE ORDER'}
         </button>
       </form>
+
+      {/* ORDER SUMMARY*/}
+      <div className="border border-black p-8 sticky top-24">
+        <h2 className="text-lg tracking-wider mb-6">ORDER SUMMARY</h2>
+
+        {cart.map((item) => (
+          <div key={item.product.id}>
+            <div className="flex flex-row gap-3 space-y-4 mb-6">
+              <Image
+                src={item.product.image}
+                alt={item.product.name}
+                width={100}
+                height={150}
+                className="object-cover"
+              />
+              <div className="flex flex-col gap-0.5">
+                <h3 className="text-sm tracking-wider mb-1 font-bold">
+                  {item.product.name}
+                </h3>
+                <span className="text-xs mb-2 text-gray-600">
+                  Quantity: {item.quantity}
+                </span>
+                <span className="text-sm mb-2 font-bold">
+                  {(item.product.price * item.quantity).toFixed(2)}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <div className="border-t border-black pt-4 space-y-2">
+          <div className="flex justify-between text-sm">
+            <span> Subtotal</span>
+            <span>{totalPrice.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span>Shipping</span>
+            <span>Free</span>
+          </div>
+          <div className="flex justify-between text-sm font-bold">
+            <span className="tracking-wider">Total</span>
+            <span>{totalPrice.toFixed(2)}</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
