@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
 import { AddToCartButton } from '@/app/components';
 import { products } from '@/app/data/products';
+import Link from 'next/link';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -12,7 +12,16 @@ export default async function ProductDetailPage({ params }: Props) {
 
   const product = products.find((p) => p.slug === slug);
 
-  if (!product) return notFound();
+  if (!product) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl traking-widest mb-4">Product not found</h2>
+          <Link href="/">Return to shop</Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
