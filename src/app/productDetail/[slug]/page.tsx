@@ -39,6 +39,24 @@ export default async function ProductDetailPage({ params }: Props) {
           <h2 className="text-3xl tracking-widest">{product.name}</h2>
           <p className="text-xl">${product.price.toFixed(2)}</p>
           <AddToCartButton product={product} />
+
+          {/* Product Details */}
+          <div className="border-t border-black pt-8 mt-8">
+            <details className="mb-4">
+              <summary className="cursor-pointer text-sm tracking-wider py-2">
+                DESCRIPTION
+              </summary>
+              <p className="text-sm text-gray-600 mt-4 leading-relaxed"></p>
+            </details>
+            <details className="mb-4">
+              <summary className="cursor-pointer text-sm tracking-wider py-2">
+                SHIPPING & RETURNS
+              </summary>
+              <p className="text-sm text-gray-600 mt-4 leading-relaxed">
+                Free shipping on orders over $100. Easy returns within 30 days.
+              </p>
+            </details>
+          </div>
         </div>
       </div>
     </div>
