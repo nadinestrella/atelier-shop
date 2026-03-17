@@ -42,13 +42,14 @@ export function Header() {
               aria-label="Shopping cart"
             >
               <ShoppingBag className="size-5" />
+
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
             </button>
 
-            {totalItems > 0 && (
-              <span className="text-sm tracking-wider uppercase hover:opacity-70 transition-opacity">
-                BASKET {totalItems}
-              </span>
-            )}
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

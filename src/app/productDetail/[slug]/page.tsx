@@ -40,7 +40,7 @@ export default async function ProductDetailPage({ params }: Props) {
         <div>
           <div className="flex flex-col justify-center gap-6">
             <h2 className="text-3xl tracking-widest">{product.name}</h2>
-            <p className="text-xl mb-4">${product.price.toFixed(2)}</p>
+            <p className="text-xl mb-4">{product.price.toFixed(2)} €</p>
           </div>
           {/* Add to Cart Button */}
           <AddToCartButton product={product} />
@@ -59,7 +59,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 SHIPPING & RETURNS
               </summary>
               <p className="text-sm text-gray-600 mt-4 leading-relaxed">
-                Free shipping on orders over $100. Easy returns within 30 days.
+                Free shipping on orders over 100 €. Easy returns within 30 days.
               </p>
             </details>
           </div>

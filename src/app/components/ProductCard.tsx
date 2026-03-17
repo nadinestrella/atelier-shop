@@ -19,7 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
         />
       </div>
       <h3 className="text-sm tracking-wide mb-1">{product.name}</h3>
-      <p className="text-sm font-bold">${product.price.toFixed(2)}</p>
+      <p className="text-sm font-bold">{product.price.toFixed(2)} €</p>
     </Link>
   );
 }

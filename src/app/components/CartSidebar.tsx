@@ -64,7 +64,7 @@ export function CartSidebar() {
                         {item.product.name}
                       </h3>
                       <span className="text-sm mb-2">
-                        {item.product.price.toFixed(2)}
+                        {item.product.price.toFixed(2)} €
                       </span>
 
                       <div className="flex flex-row  gap-3">
