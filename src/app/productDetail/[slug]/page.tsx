@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { AddToCartButton } from '@/app/components';
-import { products } from '@/app/data/products';
 import Link from 'next/link';
+import { products } from '@/app/data/products';
+import { AddToCart } from '@/app/components/AddToCart';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -42,8 +42,10 @@ export default async function ProductDetailPage({ params }: Props) {
             <h2 className="text-3xl tracking-widest">{product.name}</h2>
             <p className="text-xl mb-4">{product.price.toFixed(2)} €</p>
           </div>
-          {/* Add to Cart Button */}
-          <AddToCartButton product={product} />
+
+          {/* Size Selector and Add to Cart Button  */}
+          <AddToCart product={product} />
+
           {/* Product Details */}
           <div className="border-t border-black pt-8 mt-8">
             <details className="mb-4">
