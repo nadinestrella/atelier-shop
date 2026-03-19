@@ -144,7 +144,7 @@ export default function CheckoutPage() {
                   {...register('streetAddress', {
                     required: true,
                     pattern: {
-                      value: /^[a-zA-Z\s]+$/,
+                      value: /^[a-zA-Z0-9\s]+$/,
                       message: 'Invalid Street Address',
                     },
                   })}
