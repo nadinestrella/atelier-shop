@@ -1,3 +1,5 @@
+export type Size = 'XS' | 'S' | 'M' | 'L' | 'XL';
+
 export interface Product {
   id: string;
   name: string;
@@ -17,14 +19,14 @@ export interface Category {
 export interface CartItem {
   product: Product;
   quantity: number;
-  size: string;
+  size: Size;
 }
 
 export interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  addToCart: (product: Product, size: Size) => void;
+  removeFromCart: (productId: string, size: Size) => void;
+  updateQuantity: (productId: string, quantity: number, size: Size) => void;
   clearCart: () => void;
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
