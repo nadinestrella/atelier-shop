@@ -27,7 +27,7 @@ export default async function ProductDetailPage({ params }: Props) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product Image */}
-        <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+        <div className="-3/4 overflow-hidden bg-gray-100">
           <Image
             src={product.image}
             alt={product.name}

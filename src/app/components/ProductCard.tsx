@@ -9,7 +9,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/productDetail/${product.slug}`}>
-      <div className="aspect-[3/4] overflow-hidden bg-gray-100 mb-3">
+      <div className="aspect-3/4 overflow-hidden bg-gray-100 mb-3">
         <Image
           src={product.image}
           alt={product.name}
