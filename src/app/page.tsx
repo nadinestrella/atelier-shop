@@ -1,4 +1,3 @@
-import { CartSidebar } from './components';
 import { ProductCard } from './components/ProductCard';
 import { products } from './data/products';
 

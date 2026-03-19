@@ -1,8 +1,8 @@
 'use client';
 import { Minus, Plus, X } from 'lucide-react';
-import { useCart } from '../context/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCart } from '../context/CartContext';
 
 export function CartSidebar() {
   const {

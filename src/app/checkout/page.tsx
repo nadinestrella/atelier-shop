@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useCart } from '../context/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Handbag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useCart } from '../context/CartContext';
 
 interface FormData {
   firstName: string;

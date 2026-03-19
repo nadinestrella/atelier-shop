@@ -1,4 +1,4 @@
-import { ProductCard } from '../../components/ProductCard';
+import { ProductCard } from '@/app/components';
 import { categories, products } from '../../data/products';
 
 interface Props {
