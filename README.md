@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Atelier Shop
 
-## Getting Started
+Atelier Shop is a modern e-commerce web application built with a cutting-edge frontend stack. It focuses on delivering a fast, clean, and scalable shopping experience.
 
-First, run the development server:
+---
+
+## 🚀 Tech Stack
+
+- **React** – Library for building user interfaces
+- **Next.js** – React framework with hybrid rendering (SSR/SSG)
+- **TypeScript** – Static typing for better scalability and maintainability
+- **Tailwind CSS** – Utility-first CSS framework for rapid UI development
+
+---
+
+## ✨ Features
+
+- 🛒 Shopping cart management
+- 📦 Dynamic product listing
+- 🔍 Category-based navigation
+- 🧾 Quantity and variant handling (e.g. sizes)
+- 💰 Automatic total price calculation
+- ⚡ Fast and optimized UI
+- 📱 Fully responsive design
+
+---
+
+## 🧠 Architecture
+
+The application follows modern frontend best practices:
+
+- Reusable and modular components
+- Global state management using **Context API**
+- Strong typing with TypeScript
+- Custom hooks for reusable logic
+
+---
+
+## 📁 Project Structure
+
+```
+/atelier-shop/src/app
+ ├── category
+ ├── checkout
+ ├── components
+ ├── context
+ ├── data
+ ├── orderConfirmation
+ ├── productDetail
+
+```
+
+---
+
+## 🛠️ Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/atelier-shop.git
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open in your browser:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📦 Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev` – start development environment
+- `npm run build` – create production build
+- `npm run start` – run production build
+- `npm run lint` – run linter
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 License
 
-## Deploy on Vercel
+This project is for personal and educational purposes.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👩‍💻 Author
+
+Built with 💜 by **Nadine** Estrella Junior Frontend Developer passionate about creating great digital experiences.
