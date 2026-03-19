@@ -68,7 +68,7 @@ export function CartSidebar() {
                       <h3 className="text-sm tracking-wide mb-1 font-bold">
                         {item.product.name}
                       </h3>
-                      <p>Size: {item.size}</p>
+                      <span className="text-sm mb-2">Size: {item.size}</span>
                       <span className="text-sm mb-2">
                         {item.product.price.toFixed(2)} €
                       </span>
