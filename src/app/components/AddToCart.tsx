@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { Product } from '@/types';
+import { Product, Size } from '@/types';
 
 export function AddToCart({ product }: { product: Product }) {
   const { addToCart } = useCart();
-  const [selectedSize, setSelectedSize] = useState<string>('M');
-  const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+  const [selectedSize, setSelectedSize] = useState<Size>('M');
+
+  const sizes: Size[] = ['XS', 'S', 'M', 'L', 'XL'];
+
   return (
     <div>
       {/* Size Selector */}
@@ -30,7 +32,7 @@ export function AddToCart({ product }: { product: Product }) {
       {/* Add to Cart Button */}
 
       <button
-        onClick={() => addToCart(product)}
+        onClick={() => addToCart(product, selectedSize)}
         className="bg-black text-white py-4 px-8 tracking-widest text-sm hover:bg-gray-800 transition-colors"
       >
         ADD TO CART

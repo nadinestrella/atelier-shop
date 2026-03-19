@@ -44,9 +44,9 @@ export default function CheckoutPage() {
       date: new Date().toISOString(),
     };
 
-    console.log(order);
+    console.log('order', order);
 
-    console.log(data);
+    console.log('data', data);
     setTimeout(() => {
       setIsSubmitting(false);
       clearCart();
@@ -284,7 +284,7 @@ export default function CheckoutPage() {
             <h2 className="text-lg tracking-wider mb-6">ORDER SUMMARY</h2>
 
             {cart.map((item) => (
-              <div key={item.product.id}>
+              <div key={`${item.product.id}-${item.size}`}>
                 <div className="flex flex-row gap-3 space-y-4 mb-6">
                   <Image
                     src={item.product.image}
@@ -297,11 +297,12 @@ export default function CheckoutPage() {
                     <h3 className="text-sm tracking-wider mb-1 font-bold">
                       {item.product.name}
                     </h3>
+                    <p>Size: {item.size}</p>
                     <span className="text-xs mb-2 text-gray-600">
                       Quantity: {item.quantity}
                     </span>
                     <span className="text-sm mb-2 font-bold">
-                      {(item.product.price * item.quantity).toFixed(2)}
+                      {(item.product.price * item.quantity).toFixed(2)} €
                     </span>
                   </div>
                 </div>
@@ -311,7 +312,7 @@ export default function CheckoutPage() {
             <div className="border-t border-black pt-4 space-y-2">
               <div className="flex justify-between text-sm">
                 <span> Subtotal</span>
-                <span>{totalPrice.toFixed(2)}</span>
+                <span>{totalPrice.toFixed(2)} </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span>Shipping</span>
@@ -319,7 +320,7 @@ export default function CheckoutPage() {
               </div>
               <div className="flex justify-between text-sm font-bold">
                 <span className="tracking-wider">Total</span>
-                <span>{totalPrice.toFixed(2)}</span>
+                <span>{totalPrice.toFixed(2)} €</span>
               </div>
             </div>
           </div>

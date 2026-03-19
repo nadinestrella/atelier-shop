@@ -16,6 +16,8 @@ export function CartSidebar() {
     totalItems,
   } = useCart();
 
+  console.log('cart', cart);
+
   if (!isCartOpen) return null;
   return (
     <>
@@ -49,7 +51,10 @@ export function CartSidebar() {
             {totalItems > 0 ? (
               <div className="space-y-6">
                 {cart.map((item) => (
-                  <div key={item.product.id} className="flex gap-4">
+                  <div
+                    key={`${item.product.id}-${item.size}`}
+                    className="flex gap-4"
+                  >
                     <div className="bg-gray-100">
                       <Image
                         src={item.product.image}
@@ -59,10 +64,11 @@ export function CartSidebar() {
                         className="object-cover"
                       />
                     </div>
-                    <div className="flex flex-col gap-8">
-                      <h3 className="text-sm tracking-wide mb-1">
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-sm tracking-wide mb-1 font-bold">
                         {item.product.name}
                       </h3>
+                      <p>Size: {item.size}</p>
                       <span className="text-sm mb-2">
                         {item.product.price.toFixed(2)} €
                       </span>
@@ -71,7 +77,11 @@ export function CartSidebar() {
                         <div className=" flex items-center border border-black">
                           <button
                             onClick={() =>
-                              updateQuantity(item.product.id, item.quantity - 1)
+                              updateQuantity(
+                                item.product.id,
+                                item.quantity - 1,
+                                item.size,
+                              )
                             }
                             className="p-1 hover:bg-black hover:text-white transition-colors"
                             aria-label="Decrease quantity"
@@ -81,7 +91,11 @@ export function CartSidebar() {
                           <span className="px-3 text-sm">{item.quantity}</span>
                           <button
                             onClick={() =>
-                              updateQuantity(item.product.id, item.quantity + 1)
+                              updateQuantity(
+                                item.product.id,
+                                item.quantity + 1,
+                                item.size,
+                              )
                             }
                             className="p-1 hover:bg-black hover:text-white transition-colors"
                             aria-label="Increase quantity"
@@ -90,7 +104,9 @@ export function CartSidebar() {
                           </button>
                         </div>
                         <button
-                          onClick={() => removeFromCart(item.product.id)}
+                          onClick={() =>
+                            removeFromCart(item.product.id, item.size)
+                          }
                           className="text-xs underline hover:opacity-70 transition-opacity"
                         >
                           Remove
