@@ -51,7 +51,7 @@ export default function CheckoutPage() {
       setIsSubmitting(false);
       clearCart();
       alert('Order placed successfully! Thank you for your purchase.');
-      router.push('/');
+      router.push('/orderConfirmation');
     }, 2000);
   };
 
