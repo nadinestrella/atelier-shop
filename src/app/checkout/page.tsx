@@ -26,8 +26,8 @@ export default function CheckoutPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+    formState: { errors, isValid },
+  } = useForm<FormData>({ mode: 'onChange' });
   const { clearCart, cart, totalItems, totalPrice } = useCart();
 
   const router = useRouter();
@@ -271,7 +271,7 @@ export default function CheckoutPage() {
             <button
               type="submit"
               className="w-full bg-black text-white py-4 tracking-wider text-sm hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:bg-gray-400"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValid}
             >
               {isSubmitting ? 'PROCESSING...' : 'PLACE ORDER'}
             </button>
