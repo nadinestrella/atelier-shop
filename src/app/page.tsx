@@ -1,9 +1,11 @@
+import Chatbot from './components/Chatbot';
 import { ProductCard } from './components/ProductCard';
 import { products } from './data/products';
 
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <Chatbot />
       {/* Hero Section */}
       <div className="relative h-[60vh] bg-black text-white flex items-center justify-center">
         <div className="text-center">
