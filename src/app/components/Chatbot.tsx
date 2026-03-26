@@ -12,6 +12,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>('');
   const [isChatbotOpen, setIsChatbotOpen] = useState<boolean>(false);
+  const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const getBotResponse = (message: string) => {
     const msg = message.toLowerCase();
@@ -32,12 +33,24 @@ export default function Chatbot() {
   const handleSend = () => {
     if (!input.trim()) return;
     const userMessage: Message = { text: input, from: 'user' };
-    const botMessage: Message = {
-      text: getBotResponse(input),
-      from: 'bot',
-    };
-    setMessages((prev) => [...prev, userMessage, botMessage]);
+
+    //set userMessage
+    setMessages((prev) => [...prev, userMessage]);
+    setIsTyping(true);
+    const userInput = input;
     setInput('');
+
+    //set botMessage
+    setTimeout(() => {
+      const botMessage: Message = {
+        text: getBotResponse(userInput),
+        from: 'bot',
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
+
+      setIsTyping(false);
+    }, 2000);
   };
 
   return (
@@ -87,6 +100,13 @@ export default function Chatbot() {
                 </div>
               </div>
             ))}
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className="px-3 py-2 rounded-lg max-w-[70%] bg-gray-200 text-black text-sm">
+                  <span className="animate-pulse">Writing</span>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Input */}
