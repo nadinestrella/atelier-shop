@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 
 import './globals.css';
 import { CartSidebar } from './components';
+import Chatbot from './components/Chatbot';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,6 +36,7 @@ export default function RootLayout({
           <Header />
           <CartSidebar />
           {children}
+          <Chatbot />
         </CartProvider>
       </body>
     </html>
