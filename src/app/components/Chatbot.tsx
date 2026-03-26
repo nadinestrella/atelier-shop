@@ -1,7 +1,7 @@
 'use client';
 
 import { MessageCircle, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type Message = {
   text: string;
@@ -9,10 +9,16 @@ type Message = {
 };
 
 export default function Chatbot() {
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>('');
   const [isChatbotOpen, setIsChatbotOpen] = useState<boolean>(false);
   const [isTyping, setIsTyping] = useState<boolean>(false);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const getBotResponse = (message: string) => {
     const msg = message.toLowerCase();
@@ -107,6 +113,7 @@ export default function Chatbot() {
                 </div>
               </div>
             )}
+            <div ref={bottomRef} />
           </div>
 
           {/* Input */}
