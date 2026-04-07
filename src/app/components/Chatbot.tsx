@@ -11,7 +11,9 @@ type Message = {
 export default function Chatbot() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    { text: 'Hi! How can we help you? 🙂', from: 'bot' },
+  ]);
   const [input, setInput] = useState<string>('');
   const [isChatbotOpen, setIsChatbotOpen] = useState<boolean>(false);
   const [isTyping, setIsTyping] = useState<boolean>(false);
@@ -19,6 +21,17 @@ export default function Chatbot() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  useEffect(() => {
+    const hasOpened = localStorage.getItem('chatbot-opened');
+
+    if (!hasOpened) {
+      setTimeout(() => {
+        setIsChatbotOpen(true);
+        localStorage.setItem('chatbot-opened', 'true');
+      }, 1500);
+    }
+  }, []);
 
   const getBotResponse = (message: string) => {
     const msg = message.toLowerCase();
@@ -83,11 +96,6 @@ export default function Chatbot() {
           {/* Messages */}
 
           <div className="flex-1 overflow-y-auto h-96 bg-white p-2.5 flex flex-col gap-2">
-            <div className="flex justify-end">
-              <p className="px-3 py-2 rounded-lg max-w-[70%] bg-gray-400 text-white text-sm">
-                Hi! How can we help you?
-              </p>
-            </div>
             {messages.map((msg, i) => (
               <div
                 key={i}
