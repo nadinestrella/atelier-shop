@@ -6,13 +6,18 @@ import { useEffect, useRef, useState } from 'react';
 type Message = {
   text: string;
   from: 'user' | 'bot';
+  options?: string[];
 };
 
 export default function Chatbot() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const [messages, setMessages] = useState<Message[]>([
-    { text: 'Hi! How can we help you? 🙂', from: 'bot' },
+    {
+      text: 'Hi! How can we help you? 🙂',
+      from: 'bot',
+      options: ['Shipping', 'Returns', 'Sizes'],
+    },
   ]);
   const [input, setInput] = useState<string>('');
   const [isChatbotOpen, setIsChatbotOpen] = useState<boolean>(false);
@@ -36,7 +41,7 @@ export default function Chatbot() {
   const getBotResponse = (message: string) => {
     const msg = message.toLowerCase();
 
-    if (msg.includes('shipment')) {
+    if (msg.includes('shipping')) {
       return 'Shipping takes between 24 and 48 hours.';
     }
 
@@ -72,6 +77,42 @@ export default function Chatbot() {
     }, 2000);
   };
 
+  //Options buttons
+  const handleOptionClick = (option: string) => {
+    const normalized = option.toLowerCase();
+    const userMessage: Message = { text: option, from: 'user' };
+    let botResponse: Message;
+
+    if (normalized.includes('shipping')) {
+      botResponse = {
+        text: '📦 Shipping takes between 24 and 48 hours.',
+        from: 'bot',
+      };
+    } else if (normalized.includes('returns')) {
+      botResponse = {
+        text: '🔄 You can return your order within 30 days.',
+        from: 'bot',
+      };
+    } else if (normalized.includes('sizes')) {
+      botResponse = {
+        text: '👕 We recommend you check our size guide.',
+        from: 'bot',
+      };
+    } else {
+      botResponse = {
+        text: 'I am not sure about that 🤔, but I can help you with shipping, returns, or sizes.',
+        from: 'bot',
+      };
+    }
+    setMessages((prev) => [...prev, userMessage]);
+    setIsTyping(true);
+    setTimeout(() => {
+      setMessages((prev) => [...prev, botResponse]);
+
+      setIsTyping(false);
+    }, 1500);
+  };
+
   return (
     <div className="fixed bottom-11 right-4 w-80  shadow-2xl z-20">
       <button
@@ -103,17 +144,36 @@ export default function Chatbot() {
                   msg.from === 'user' ? 'justify-end' : 'justify-start'
                 }`}
               >
-                <div
-                  className={`px-3 py-2 rounded-lg max-w-[70%] text-sm ${
-                    msg.from === 'user'
-                      ? 'bg-gray-400 text-white'
-                      : 'bg-gray-200 text-black'
-                  }`}
-                >
-                  {msg.text}
+                <div className="flex flex-col w-full">
+                  <div
+                    className={`px-3 py-2 rounded-lg max-w-[70%] text-sm ${
+                      msg.from === 'user'
+                        ? ' bg-black text-white ml-auto'
+                        : 'bg-gray-200 text-black mr-auto'
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
+
+                  {/* Options buttons */}
+                  {msg.options && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {msg.options.map((option, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => handleOptionClick(option)}
+                          className="text-xs bg-gray-200 border border-gray-300 px-2 py-1 rounded-lg hover:bg-gray-400 hover:text-white"
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
+
+            {/* isTyping */}
             {isTyping && (
               <div className="flex justify-start">
                 <div className="px-3 py-2 rounded-lg max-w-[70%] bg-gray-200 text-black text-sm">
