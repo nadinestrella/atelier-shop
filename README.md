@@ -98,3 +98,10 @@ This project is for personal and educational purposes.
 ## 👩‍💻 Author
 
 Built with 💜 by **Nadine** Estrella Junior Frontend Developer passionate about creating great digital experiences.
+
+## 🧰 Future improvements
+
+- Create my own API
+- Tests to Chatbot, productCard and Cart
+- WishList
+- Profile (nextAuth.js)
