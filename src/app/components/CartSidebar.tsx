@@ -136,7 +136,7 @@ export function CartSidebar() {
             <div className="flex flex-col justify-between items-center mt-auto p-4 border-t border-black">
               <div className="flex flex-row justify-between w-full mb-4">
                 <span>TOTAL</span>
-                <span>{totalPrice.toFixed(2)}</span>
+                <span>{totalPrice.toFixed(2)} €</span>
               </div>
               <Link
                 onClick={() => setIsCartOpen(false)}
