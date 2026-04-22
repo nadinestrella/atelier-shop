@@ -1,7 +1,12 @@
+import { Product } from '@/types';
 import { ProductCard } from './components/ProductCard';
-import { products } from './data/products';
 
-export default function Home() {
+export default async function Home() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+    cache: 'no-store',
+  });
+  const products: Product[] = await res.json();
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}

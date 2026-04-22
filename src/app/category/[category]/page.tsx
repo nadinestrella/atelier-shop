@@ -1,5 +1,6 @@
 import { ProductCard } from '@/app/components';
-import { categories, products } from '../../data/products';
+import { categories, products } from '../../lib/products';
+import { Product } from '@/types';
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -8,9 +9,12 @@ interface Props {
 export default async function CategoryPage({ params }: Props) {
   const { category } = await params;
 
-  const filteredProducts = products.filter(
-    (product) => product.category === category,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products?category=${category}`,
+    { cache: 'no-store' },
   );
+
+  const filteredProducts: Product[] = await res.json();
 
   const categoryName = categories.find((cat) => cat.slug === category);
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, ShoppingBag, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { categories } from '../data/products';
+import { categories } from '../lib/products';
 
 export function Header() {
   const { setIsCartOpen, totalItems } = useCart();
