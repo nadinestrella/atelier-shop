@@ -16,8 +16,6 @@ export function CartSidebar() {
     totalItems,
   } = useCart();
 
-  console.log('cart', cart);
-
   if (!isCartOpen) return null;
   return (
     <>

@@ -44,9 +44,6 @@ export default function CheckoutPage() {
       date: new Date().toISOString(),
     };
 
-    console.log('order', order);
-
-    console.log('data', data);
     setTimeout(() => {
       setIsSubmitting(false);
       clearCart();

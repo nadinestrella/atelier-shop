@@ -1,5 +1,5 @@
 import { ProductCard } from '@/app/components';
-import { categories, products } from '../../lib/products';
+import { categories } from '../../lib/products';
 import { Product } from '@/types';
 
 interface Props {
