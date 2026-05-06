@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { AddToCart } from '@/app/components/AddToCart';
+import { BASE_URL } from '@/app/lib/config';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -8,12 +9,9 @@ interface Props {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${slug}`,
-    {
-      cache: 'no-store',
-    },
-  );
+  const res = await fetch(`${BASE_URL}/api/products/${slug}`, {
+    cache: 'no-store',
+  });
 
   if (!res.ok) {
     return (

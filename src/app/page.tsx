@@ -1,8 +1,9 @@
 import { Product } from '@/types';
 import { ProductCard } from './components/ProductCard';
+import { BASE_URL } from './lib/config';
 
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+  const res = await fetch(`${BASE_URL}/api/products`, {
     cache: 'no-store',
   });
   const products: Product[] = await res.json();
