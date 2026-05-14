@@ -1,12 +1,14 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, ShoppingBag, X } from 'lucide-react';
+import { Menu, ShoppingBag, Heart, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 import { categories } from '../lib/products';
 
 export function Header() {
   const { setIsCartOpen, totalItems } = useCart();
+  const { setIsWishlistOpen, items: wishlistItems } = useWishlist();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -36,6 +38,20 @@ export function Header() {
 
           {/* Actions */}
           <div className="flex  items-center gap-4">
+            <button
+              onClick={() => setIsWishlistOpen(true)}
+              className="relative hover:opacity-70 transition-opacity"
+              aria-label="Wishlist"
+            >
+              <Heart className="size-5" />
+
+              {wishlistItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-rose-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                  {wishlistItems.length}
+                </span>
+              )}
+            </button>
+
             <button
               onClick={() => setIsCartOpen(true)}
               className="relative hover:opacity-70 transition-opacity"

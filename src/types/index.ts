@@ -33,3 +33,18 @@ export interface CartContextType {
   totalItems: number;
   totalPrice: number;
 }
+
+export interface WishlistItem {
+  product: Product;
+  addedAt: Date;
+}
+
+export interface WishlistContextType {
+  items: WishlistItem[];
+  addToWishlist: (product: Product) => void;
+  removeFromWishlist: (productId: string) => void;
+  isInWishlist: (productId: string) => boolean;
+  clearWishlist: () => void;
+  isWishlistOpen: boolean;
+  setIsWishlistOpen: (open: boolean) => void;
+}
